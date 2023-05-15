@@ -7,7 +7,6 @@
     <title>list</title>
 </head>
 <body>
-    list file
     <button id="logout" onclick="redirectLogout()">Logout</button>
 
     <script>

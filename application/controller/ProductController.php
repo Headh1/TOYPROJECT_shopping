@@ -1,9 +1,9 @@
 <?php
-namespace application\controller;
+// namespace application\controller;
 
-class ProductController extends Controller{
-    public function listGet() {
-        return "list"._EXTENSION_PHP;
-    }
-}
+// class ProductController extends Controller{
+//     public function listGet() {
+//         return "main"._EXTENSION_PHP;
+//     }
+// }
 ?>

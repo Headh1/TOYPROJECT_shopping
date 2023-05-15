@@ -7,7 +7,7 @@ use \AllowDynamicProperties;
 class Controller {
     protected $model;
     private static $modelList = [];
-    private static $arrNeedAuth = ["product/list"]; // 여러개의 model을 계속 호출할때 메모리의 사용량을 줄이기위해
+    private static $arrNeedAuth = ["recipe/list"]; // 여러개의 model을 계속 호출할때 메모리의 사용량을 줄이기위해
 
     // 생성자
     public function __construct($identityName,$action) {
@@ -41,6 +41,7 @@ class Controller {
         }
         return self::$modelList[$identityName];
     }
+
     // 파라미터를 확인해서 해당하는 view를 리턴하거나, redirect
     protected function getView($view) {
         // view를 체크
@@ -51,7 +52,11 @@ class Controller {
 
         return _PATH_VIEW.$view;
     }
-    // 동적 속성을 셋팅하는 메소드
+
+    protected function mainGet(){
+        return "main"._EXTENSION_PHP;
+    }
+        // 동적 속성을 셋팅하는 메소드
     protected function addDynamicProperty($key, $val) {
         $this->$key = $val;
     }

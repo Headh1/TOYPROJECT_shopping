@@ -10,12 +10,14 @@
     <h1> Login </h1>
     <h3 style="color:red;"><?php echo isset($this->errMsg) ? $this->errMsg : "" ?></h3>
     <form action="/user/login" method="post">
-        <label for="id"> ID </label>
-        <input type="text" name="id" id="id">
-        <label for="pw"> PASSWORD </label>
-        <input type="text" name="pw" id="pw">
+        <label for="u_id"> ID </label>
+        <input type="text" name="u_id" id="u_id">
+        <label for="u_pw"> PASSWORD </label>
+        <input type="text" name="u_pw" id="u_pw">
         <button type="submit">Login</button>
-        <button type="submit">Login</button>
+    </form>
+    <form action="/user/sign" method="get">
+        <button type="submit">회원가입</button>
     </form>
 </body>
 </html>
