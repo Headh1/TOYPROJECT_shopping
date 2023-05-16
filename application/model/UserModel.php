@@ -2,12 +2,19 @@
 namespace application\model;
 
 class UserModel extends Model{
-    public function getUser($arrUserInfo){
-        $sql =" SELECT * from user_info where u_id = :u_id and u_pw = :u_pw";
+    public function getUser($arrUserInfo, $pwFlg = true ) {
+        $sql =" SELECT * from user_info where u_id = :u_id ";
+        if($pwFlg) {
+            $sql .= " and u_pw = :u_pw ";
+        }
+        
         $prepare = [
             ":u_id" => $arrUserInfo["u_id"]
-            ,":u_pw" => $arrUserInfo["u_pw"]
         ];
+        if($pwFlg) {
+            $prepare[":u_pw"] = $arrUserInfo["u_pw"];
+        } 
+
         try {
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($prepare);
@@ -17,60 +24,86 @@ class UserModel extends Model{
             echo "UserModel->getUser Error : ".$e->getMessage();
             exit();
         }
-        finally{
-            $this->closeConn();
-        }
         return $result;
     }
 
-    public function getUserid($arrUserInfo){
-        $sql =" SELECT u_id from user_info where u_id = :u_id ";
-        $prepare = [
-            ":u_id" => $arrUserInfo["u_id"]
-        ];
-        try {
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute($prepare);
-            $result = $stmt->rowcount();
-            // $result = $stmt->fetchAll();
-
-        } catch ( Exception $e) {
-            echo "UserModel->getUser Error : ".$e->getMessage();
-            exit();
-        }
-        return $result;
-    }
-    
     public function signUser($arrUsersign) {
         $sql =
-            " INSERT INTO "
-            ." user_info "
-            ." ( "
+            " INSERT INTO  user_info ( "
             ." u_id "
-            ." , "
-            ." u_pw "
-            ." ) "
+            ." , u_pw "
+            ." , u_name ) "
             ." VALUES "
             ." ( "
             ." :u_id "
-            ." , "
-            ." :u_pw "
-            ." ) ";
+            ." , :u_pw "
+            ." , :u_name ) ";
 
-        $prepare = [ ":u_id" => $arrUsersign["u_id"] , ":u_pw" => $arrUsersign["u_pw"] ];
+        $prepare = [ 
+            ":u_id" => $arrUsersign["u_id"] 
+            , ":u_pw" => $arrUsersign["u_pw"] 
+            , ":u_name" => $arrUsersign["u_name"] 
+    ];
     
         try {
-            // $this->conn->beginTransaction();
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute($prepare);
-            $result = $stmt->rowcount();
-            $this->conn->commit();
+            $result = $stmt->execute($prepare);
+            return $result;
         }
         catch ( Exception $e) {
-            $this->connrollback();
-            return $e->getmessage();
+            return false;
         }
-        return $result;
     }
+
+    // public function getUserid($arrUserInfo){
+    //     $sql =" SELECT u_id from user_info where u_id = :u_id ";
+    //     $prepare = [
+    //         ":u_id" => $arrUserInfo["u_id"]
+    //     ];
+    //     try {
+    //         $stmt = $this->conn->prepare($sql);
+    //         $stmt->execute($prepare);
+    //         $result = $stmt->rowcount();
+    //         // $result = $stmt->fetchAll();
+
+    //     } catch ( Exception $e) {
+    //         echo "UserModel->getUser Error : ".$e->getMessage();
+    //         exit();
+    //     }
+    //     return $result;
+    // }
+
+    // public function signUser($arrUsersign) {
+    //     $sql =
+    //         " INSERT INTO  user_info "
+    //         ." ( "
+    //         ." u_id "
+    //         ." , u_pw "
+    //         ." , u_name ) "
+    //         ." VALUES "
+    //         ." ( "
+    //         ." :u_id "
+    //         ." ,  :u_pw "
+    //         ." , :u_name) ";
+
+    //     $prepare = [ ":u_id" => $arrUsersign["u_id"] 
+    //     , ":u_pw" => $arrUsersign["u_pw"] 
+    //     , ":u_name" => $arrUsersign["u_name"] 
+    // ];
+    
+    //     try {
+    //         $this->conn->beginTransaction();
+    //         $stmt = $this->conn->prepare($sql);
+    //         $stmt->execute($prepare);
+    //         $result = $stmt->rowcount();
+    //         $this->conn->commit();
+    //     }
+    //     catch ( Exception $e) {
+    //         $this->connrollback();
+    //         return $e->getmessage();
+    //     }
+    //     return $result;
+    // }
+    
 }
 ?>

@@ -1,0 +1,43 @@
+h1{
+    color: #F45050;
+}
+input{
+    width : 300px;
+    height : 40px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+#u_pw{
+    margin-top : 10px;
+}
+.allMain{
+    margin: 0 auto;
+    width:500px;
+    height: 500px;
+    background-color: #f1efef;
+    text-align: center;
+
+}
+.mainForm{
+    line-height: 80px;
+}
+.btnLogin{
+    width:300px;
+    height: 35px;
+    background-color: #f57272;
+    border: none;
+}
+.btnLogin:hover{
+    background-color: #F45050;
+    cursor: pointer;
+}
+.btnSign,.btnPwS{
+    all: unset;
+    color:#5e5a5a;
+    font-size: small;
+}
+.btnSign:hover,.btnPwS:hover{
+    text-decoration-line: underline;
+    font-style: italic;
+    cursor: pointer;
+}

@@ -21,9 +21,22 @@ class Model {
             echo "DB Connect Error : ".$e->getMessage();
             exit();
         }
-}
-protected function closeConn() {
-    $this->conn = null;
-}
+    }
+    
+    public function close() {
+        $this->conn = null;
+    }
+    
+    public function transaction() {
+        $this->conn->beginTransaction();
+    }
+
+    public function rollback() {
+        $this->conn->rollback();
+    }
+    
+    public function commit() {
+        $this->conn->commit();
+    }
 }
 ?>

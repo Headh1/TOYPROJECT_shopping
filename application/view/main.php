@@ -11,8 +11,9 @@
 rel="stylesheet"
 integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 crossorigin="anonymous">
-    <link rel="stylesheet" href="/application/view/css/common.css">
-    <title>Document</title>
+<link rel="stylesheet" href="/application/view/css/main.css">
+<link rel="stylesheet" href="/application/view/css/common.css">
+    <title> YUMMY </title>
 </head>
 <body>
     <header>
@@ -22,7 +23,7 @@ crossorigin="anonymous">
             <ul class="nav nav-pills" id="nav_log">
                 <?php if( isset($_SESSION[_STR_LOGIN_ID] )){ ?>
                     <li class="nav-item">
-                        <a href="/user/main" class="nav-link" >로그아웃</a></li>
+                        <a href="/user/logout" class="nav-link" >로그아웃</a></li>
                         <li class="nav-item">
                             <a href="#" class="nav-link" >내정보</a>
                         </li>
@@ -40,15 +41,15 @@ crossorigin="anonymous">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
                 <a href="#" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                    <img src="/application/view/logo.png" alt="yummy">
+                    <img src="/application/view/img/logo.png" alt="yummy">
                 </a>
 
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-md-between mb-md-0 py-10">
-                    <li><a href="#" class="nav-link px-5 link-secondary">베스트</a></li>
-                    <li><a href="#" class="nav-link px-4 link-dark">a</a></li>
-                    <li><a href="#" class="nav-link px-4 link-dark">a</a></li>
-                    <li><a href="#" class="nav-link px-4 link-dark">술</a></li>
-                    <li><a href="#" class="nav-link px-4 link-dark">a</a></li>
+                    <li><a href="#" class="nav-link px-5 link-secondary">카테고리</a></li>
+                    <li><a href="#" class="nav-link px-4 link-dark">베스트</a></li>
+                    <li><a href="#" class="nav-link px-4 link-dark">레시피</a></li>
+                    <li><a href="#" class="nav-link px-4 link-dark">커뮤니티</a></li>
+                    <li><a href="#" class="nav-link px-4 link-dark">구매하기</a></li>
                 </ul>
 
                 <div class="col-md-3 text-end">
@@ -68,22 +69,27 @@ crossorigin="anonymous">
 
     </header>
 <!-- 이미지 슬라이드 -->
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+        <div id="carouselExampleIndicators" class="carousel slide w-90 carouselWidth" data-bs-ride="true">
+            <div class="mainSlide">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img src="..." class="d-block w-100" alt="...">
+                    <img src="/application/view/img/food.jpg" class="d-block w-100" alt="food">
                 </div>
-            <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
-            </div>
+                <div class="carousel-item">
+                    <img src="/application/view/img/meal.jpg" class="d-block w-100" alt="meal">
+                </div>
+                <div class="carousel-item">
+                    <img src="/application/view/img/pasta.jpg" class="d-block w-100" alt="pasta">
+                </div>
+                <div class="carousel-item">
+                    <img src="/application/view/img/platter.jpg" class="d-block w-100" alt="platter">
+                </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -93,7 +99,65 @@ crossorigin="anonymous">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
+            </div>
         </div>
+        <h5> 인기 레시피 </h5>
+        <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+        <h5> 추천 레시피 </h5>
+        <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+        <h5> 오늘의 레시피 </h5>
+        <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 
