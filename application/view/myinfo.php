@@ -20,7 +20,8 @@
         <button type="submit" id="btnupdate"> 수정 </button>
     </form>
 
-    <form action="/user/del" method="get" >
+    <form action="/user/del" method="get">
+        
         <button type="submit"> 탈퇴 </button>
     </form>
 

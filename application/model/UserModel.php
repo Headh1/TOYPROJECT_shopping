@@ -86,24 +86,20 @@ class UserModel extends Model{
         }
     }
 
-    public function upUser($arrUserupdate , $pwFlg=true) {
+    public function upUser($arrUserupdate , $upFlg = true ) {
         $sql = " UPDATE user_info SET ";
 
-        if($pwFlg){
+        if($upFlg){
             $sql .= " u_name = :u_name , u_pw = :u_pw WHERE u_id = :u_id";
-        }else {
+        }else  {
             $sql .= " delflg = '1' WHERE u_id = :u_id";
         }
-        if($pwFlg) {
-            $prepare = [
-                ":u_name" => $arrUserupdate["u_name"]
-                , ":u_pw" => $arrUserupdate["u_pw"]
-                , ":u_id" => $arrUserupdate["u_id"]
-            ];
-        } else {
-            $prepare = [
-                ":u_id" => $arrUserupdate["u_id"]
-            ];
+        $prepare = [ ":u_id" => $arrUserupdate["u_id"] ];
+        
+        if($upFlg) {
+                // $prepare[":u_pw"] = $arrUserInfo["u_pw"];
+                $prepare[":u_name"] = $arrUserupdate["u_name"];
+                $prepare[":u_pw"] = $arrUserupdate["u_pw"];
         }
             
         try {
@@ -114,7 +110,7 @@ class UserModel extends Model{
         catch ( Exception $e) {
             return false;
             }
-        return $result;
+        // return $result;
 
     }
     // }

@@ -30,21 +30,22 @@ class UserController extends Controller{
     }
 
     public function delGet() {
-        $arrGet = $_Get;
-
-        $result = $this->model->upUser($arrGet,false);
+        $arrGet = $_SESSION;
+        // var_dump($arrGet);
         $this->model->transaction();
+        $result = $this->model->upUser($arrGet, false);
 
-        if( !$this->model->upUser($arrPost)){
+        if( !$result ){
             $this->model->rollback();
-            echo " User Sign ERROR!";
+            // echo " User Sign ERROR!";
             exit();
         }
         $this->model->commit();
 
         // 로그인 페이지로 이동
+        session_unset();
+        session_destroy();
         return _BASE_REDIRECT."/user/main";
-        
     }
 
     // 회원가입 메소드
