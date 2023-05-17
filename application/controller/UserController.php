@@ -29,6 +29,24 @@ class UserController extends Controller{
         return "main"._EXTENSION_PHP;
     }
 
+    public function delGet() {
+        $arrGet = $_Get;
+
+        $result = $this->model->upUser($arrGet,false);
+        $this->model->transaction();
+
+        if( !$this->model->upUser($arrPost)){
+            $this->model->rollback();
+            echo " User Sign ERROR!";
+            exit();
+        }
+        $this->model->commit();
+
+        // 로그인 페이지로 이동
+        return _BASE_REDIRECT."/user/main";
+        
+    }
+
     // 회원가입 메소드
     public function signGet() {
         return "sign"._EXTENSION_PHP;
@@ -39,7 +57,7 @@ class UserController extends Controller{
         $arrError=[];
 
         // 대문자있는지 확인
-        $ptn = '/^[A-Z]+$/';
+        $ptn = '/[^a-z0-9]/';
 
         // id 글자수 체크
         if(mb_strlen($arrPost["u_id"]) === 0 || mb_strlen($arrPost["u_id"]) > 12) {
@@ -47,9 +65,9 @@ class UserController extends Controller{
         }
 
         // id 영문 숫자 체크
-        // if(preg_match($ptn, $arrPost["u_id"]) === 0 ) {
-        //     $arrChkErr["u_id"] = "아이디는 소문자로 입력해주세요.";
-        // }
+        if(preg_match($ptn, $arrPost["u_id"]) > 0 ) {
+            $arrChkErr["u_id"] = "아이디는 소문자와 숫자로만 입력해주세요.";
+        }
 
         //pw 글자수 체크
         if(mb_strlen($arrPost["u_pw"]) < 8 || mb_strlen($arrPost["u_pw"]) > 20) {
@@ -57,6 +75,10 @@ class UserController extends Controller{
         }
 
         // pw 영문숫자특문 체크
+        // if(preg_match($ptn, $arrPost["u_pw"]) > 0 ) {
+        //     $arrChkErr["u_pw"] = "비밀번호는 소문자와 숫자로만 입력해주세요.";
+        // }
+
 
         //pw 두번확인
         if($arrPost["u_pw"] !== $arrPost["pw_once"]) {
@@ -136,5 +158,62 @@ class UserController extends Controller{
         // return _BASE_REDIRECT."/user/login";
     }
 
+    public function myinfoGet() {
+        $arrID = $_SESSION[_STR_LOGIN_ID];
+        $arr = ['u_id' => $arrID];
+        $result = $this->model->getUser($arr,false);
+        $this->addDynamicProperty("result", $result );
+        return "myinfo"._EXTENSION_PHP;
+    }
+
+    public function updateGet() {
+        // $arrID = $_SESSION[_STR_LOGIN_ID];
+        $arr = ['u_id' => $_SESSION[_STR_LOGIN_ID]];
+        $result = $this->model->getUser($arr,false);
+        $this->addDynamicProperty("result", $result );
+        return "update"._EXTENSION_PHP;
+    }
+
+    public function updatePost() {
+        $arrPost = $_POST;
+        $arrError=[];
+
+        //pw 글자수 체크
+        if(mb_strlen($arrPost["u_pw"]) < 8 || mb_strlen($arrPost["u_pw"]) > 20) {
+            $arrError["u_pw"] = "비밀번호는 8~20자 사이로 입력해주세요.";
+        }
+
+        //pw 두번확인
+        if($arrPost["u_pw"] !== $arrPost["pw_once"]) {
+            $arrError["pw_once"] = "비밀번호가 일치하지않습니다. 다시 입력해주세요.";
+        }
+
+        // 이름 확인
+        if(mb_strlen($arrPost["u_name"]) === 0 || mb_strlen($arrPost["u_name"]) > 30) {
+            $arrError["u_name"] = "이름은 30자 이하로 입력해주세요.";
+        }
+
+        // 에러메세지 셋팅
+        if(!empty($arrError)) {
+            $this->addDynamicProperty("arrError", $arrError );
+            return "update"._EXTENSION_PHP;
+            }
+
+        $result = $this->model->upUser($arrPost);
+
+        $this->model->transaction();
+
+        if( !$this->model->signUser($arrPost)){
+            $this->model->rollback();
+            echo " User update ERROR!";
+            exit();
+        }
+        $this->model->commit();
+
+        // 로그인 페이지로 이동
+        session_unset();
+        session_destroy();
+        return _BASE_REDIRECT."/user/login";
+    }
 }
 ?>

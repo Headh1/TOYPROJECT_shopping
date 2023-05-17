@@ -1,9 +1,40 @@
 <?php
 namespace application\model;
 
+// class UserModel extends Model{
+//     public function getUser($arrUserInfo, $pwFlg = true ) {
+//         $sql =" SELECT * from user_info where ";
+//         if($pwFlg) {
+//             $sql .= "u_id = :u_id and u_pw = :u_pw ";
+//         }else {
+//             $sql .= " u_id = :u_id ";
+//         }
+//         // $prepare = [];
+//         if($pwFlg) {
+//             $prepare = [
+//                 ":u_id" => $arrUserInfo["u_id"]
+//                 , ":u_pw" => $arrUserInfo["u_pw"]];
+//         }else {
+//             $prepare = [
+//                 ":u_id" => $arrUserInfo["u_id"]
+//         ];
+//         }
+
+//         try {
+//             $stmt = $this->conn->prepare($sql);
+//             $stmt->execute($prepare);
+//             $result = $stmt->fetchAll();
+
+//         } catch ( Exception $e) {
+//             echo "UserModel->getUser Error : ".$e->getMessage();
+//             exit();
+//         }
+//         return $result;
+//     }
+
 class UserModel extends Model{
     public function getUser($arrUserInfo, $pwFlg = true ) {
-        $sql =" SELECT * from user_info where u_id = :u_id ";
+        $sql =" SELECT * from user_info where delflg = '0' and u_id = :u_id ";
         if($pwFlg) {
             $sql .= " and u_pw = :u_pw ";
         }
@@ -55,6 +86,38 @@ class UserModel extends Model{
         }
     }
 
+    public function upUser($arrUserupdate , $pwFlg=true) {
+        $sql = " UPDATE user_info SET ";
+
+        if($pwFlg){
+            $sql .= " u_name = :u_name , u_pw = :u_pw WHERE u_id = :u_id";
+        }else {
+            $sql .= " delflg = '1' WHERE u_id = :u_id";
+        }
+        if($pwFlg) {
+            $prepare = [
+                ":u_name" => $arrUserupdate["u_name"]
+                , ":u_pw" => $arrUserupdate["u_pw"]
+                , ":u_id" => $arrUserupdate["u_id"]
+            ];
+        } else {
+            $prepare = [
+                ":u_id" => $arrUserupdate["u_id"]
+            ];
+        }
+            
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $result = $stmt->execute($prepare);
+            return $result;
+            }
+        catch ( Exception $e) {
+            return false;
+            }
+        return $result;
+
+    }
+    // }
     // public function getUserid($arrUserInfo){
     //     $sql =" SELECT u_id from user_info where u_id = :u_id ";
     //     $prepare = [

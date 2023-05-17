@@ -1,16 +1,10 @@
-<?php 
-
-?>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-rel="stylesheet"
-integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link rel="stylesheet" href="/application/view/css/main.css">
 <link rel="stylesheet" href="/application/view/css/common.css">
     <title> YUMMY </title>
@@ -18,14 +12,14 @@ crossorigin="anonymous">
 <body>
     <header>
     <!-- 첫번째 네비게이션 바 -->
-    <div class="container">
+    <div class="container" id="mainMid">
         <div class="d-flex justify-content-end py-3" id ="div2">
             <ul class="nav nav-pills" id="nav_log">
-                <?php if( isset($_SESSION[_STR_LOGIN_ID] )){ ?>
+                <?php if( isset($_SESSION[_STR_LOGIN_ID] )){  ?>
                     <li class="nav-item">
                         <a href="/user/logout" class="nav-link" >로그아웃</a></li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" >내정보</a>
+                            <a href="/user/myinfo" class="nav-link" >내정보</a>
                         </li>
                         <?php } else { ?>
                             <li class="nav-item">
@@ -38,9 +32,9 @@ crossorigin="anonymous">
         </div>
     </div>
         <!-- 메인 중간 네비게이션 바  -->
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-                <a href="#" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <div class="container" >
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-4 border-bottom">
+                <a href="/user/main" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
                     <img src="/application/view/img/logo.png" alt="yummy">
                 </a>
 
@@ -102,62 +96,76 @@ crossorigin="anonymous">
             </div>
         </div>
         <h5> 인기 레시피 </h5>
-        <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
+        <div class="popCard">
+          <div class="container text-center">
+            <div class="row">
+              <div class="card col" style="width: 18rem;">
+                <img src="/application/view/img/비빔밥.jpg" class="card-img-top" alt="비빔밥">
+                <div class="card-body">
+                  <p class="card-text"> 비빔밥 </p>
+                </div>
+              </div>
+              <div class="card col" style="width: 18rem;">
+                <img src="/application/view/img/닭볶음탕.jpg" class="card-img-top" alt="닭볶음탕">
+                <div class="card-body">
+                  <p class="card-text"> 닭볶음탕 </p>
+                </div>
+              </div>
+              <div class="card col" style="width: 18rem;">
+                <img src="/application/view/img/밀푀유나베.jpg" class="card-img-top" alt="밀푀유나베">
+                <div class="card-body">
+                  <p class="card-text"> 밀푀유나베 </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <h5> 추천 레시피 </h5>
-        <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
+        <div class="container text-center">
+          <div class="row">
+            <div class="card col" style="width: 18rem;">
+              <img src="/application/view/img/키토.jpg" class="card-img-top" alt="키토김밥">
+              <div class="card-body">
+                <h6 class="card-text"> 키토김밥 </h6>
+              </div>
+            </div>
+            <div class="card col" style="width: 18rem;">
+              <img src="/application/view/img/월남쌈.jpg" class="card-img-top" alt="월남쌈">
+              <div class="card-body">
+                <p class="card-text">월남쌈</p>
+              </div>
+            </div>
+            <div class="card col" style="width: 18rem;">
+              <img src="/application/view/img/샐러드파스타.jpg" class="card-img-top" alt="샐러드파스타">
+              <div class="card-body">
+                <p class="card-text">샐러드 파스타</p>
+              </div>
+            </div>
+          </div>
+        </div>
         <h5> 오늘의 레시피 </h5>
-        <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
+        <div class="container text-center">
+          <div class="row">
+            <div class="card col" style="width: 18rem;">
+              <img src="/application/view/img/연어덮밥.jpg" class="card-img-top" alt="연어덮밥">
+              <div class="card-body">
+                <p class="card-text"> 연어덮밥 </p>
+              </div>
+            </div>
+            <div class="card col" style="width: 18rem;">
+              <img src="/application/view/img/김치찌개.jpg" class="card-img-top" alt="김치찌개">
+              <div class="card-body">
+                <p class="card-text"> 김치찌개 </p>
+              </div>
+            </div>
+            <div class="card col" style="width: 18rem;">
+              <img src="/application/view/img/떡볶이.jpg" class="card-img-top" alt="떡볶이">
+              <div class="card-body">
+                <p class="card-text"> 떡볶이 </p>
+              </div>
+            </div>
+          </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 

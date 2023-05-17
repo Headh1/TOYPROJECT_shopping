@@ -1,3 +1,15 @@
 .mainSlide{
     left:80px;
 }
+
+.popCard{
+    width:1200px;
+}
+
+h5{
+    width: 300px;
+    text-align: center;
+}
+#mainMid{
+    padding-bottom : 0;
+}
