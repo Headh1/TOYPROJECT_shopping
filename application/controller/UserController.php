@@ -57,29 +57,34 @@ class UserController extends Controller{
         $arrPost = $_POST;
         $arrError=[];
 
-        // 대문자있는지 확인
         $ptn = '/[^a-z0-9]/';
+        $ptn2 = '/[^a-z0-9!@$&]/';
+        
 
         // id 글자수 체크
         if(mb_strlen($arrPost["u_id"]) === 0 || mb_strlen($arrPost["u_id"]) > 12) {
-            $arrError["u_id"] = "아이디는 12글자 이하로 입력해주세요.";
+            $arrError["u_id"] = "12글자 이하로 입력해주세요.";
         }
 
         // id 영문 숫자 체크
         if(preg_match($ptn, $arrPost["u_id"]) > 0 ) {
-            $arrChkErr["u_id"] = "아이디는 소문자와 숫자로만 입력해주세요.";
+            $arrError["u_id"] = "소문자와 숫자로만 입력해주세요.";
         }
 
         //pw 글자수 체크
         if(mb_strlen($arrPost["u_pw"]) < 8 || mb_strlen($arrPost["u_pw"]) > 20) {
-            $arrError["u_pw"] = "비밀번호는 8~20자 사이로 입력해주세요.";
+            $arrError["u_pw"] = "8~20자 사이로 입력해주세요.";
         }
 
         // pw 영문숫자특문 체크
-        // if(preg_match($ptn, $arrPost["u_pw"]) > 0 ) {
-        //     $arrChkErr["u_pw"] = "비밀번호는 소문자와 숫자로만 입력해주세요.";
+        if(preg_match($ptn2, $arrPost["u_pw"]) !== 0 ) {
+            $arrError["u_pw"] = "소문자와 숫자 !,@,$,&만 입력해주세요.";
+        }
+        
+        // $chk2 = preg_match('/^[0-9a-zA-Z\!\@\#\$\%\^\&\*]*$/u', $arrPost["u_pw"]);
+        // if($chk2 !== 1) {
+        //     $arrChkErr["u_pw"] = "영문, 숫자, 특수문자 조합으로 입력해 주세요.";
         // }
-
 
         //pw 두번확인
         if($arrPost["u_pw"] !== $arrPost["pw_once"]) {
@@ -163,15 +168,14 @@ class UserController extends Controller{
         $arrID = $_SESSION[_STR_LOGIN_ID];
         $arr = ['u_id' => $arrID];
         $result = $this->model->getUser($arr,false);
-        $this->addDynamicProperty("result", $result );
+        $this->addDynamicProperty("result", $result[0] );
         return "myinfo"._EXTENSION_PHP;
     }
 
     public function updateGet() {
-        // $arrID = $_SESSION[_STR_LOGIN_ID];
-        $arr = ['u_id' => $_SESSION[_STR_LOGIN_ID]];
+        $arr = $_SESSION;
         $result = $this->model->getUser($arr,false);
-        $this->addDynamicProperty("result", $result );
+        $this->addDynamicProperty("result", $result[0] );
         return "update"._EXTENSION_PHP;
     }
 
@@ -179,9 +183,18 @@ class UserController extends Controller{
         $arrPost = $_POST;
         $arrError=[];
 
+        // 대문자있는지 확인
+        $ptn = '/[^a-z0-9]/';
+        $ptn2 = '/[^a-z0-9!@$&]/';
+
         //pw 글자수 체크
         if(mb_strlen($arrPost["u_pw"]) < 8 || mb_strlen($arrPost["u_pw"]) > 20) {
-            $arrError["u_pw"] = "비밀번호는 8~20자 사이로 입력해주세요.";
+            $arrError["u_pw"] = "8~20자 사이로 입력해주세요.";
+        }
+
+        // pw 영문숫자특문 체크
+        if(preg_match($ptn2, $arrPost["u_pw"]) !== 0 ) {
+            $arrError["u_pw"] = "소문자와 숫자 !,@,$,&만 입력해주세요.";
         }
 
         //pw 두번확인
@@ -200,11 +213,11 @@ class UserController extends Controller{
             return "update"._EXTENSION_PHP;
             }
 
+        $this->model->transaction();
+        
         $result = $this->model->upUser($arrPost);
 
-        $this->model->transaction();
-
-        if( !$this->model->signUser($arrPost)){
+        if( !$result ){
             $this->model->rollback();
             echo " User update ERROR!";
             exit();

@@ -16,3 +16,19 @@ function chkDuplicationId() {
 
     // console.log(apiData);
 }
+
+const btndel = document.querySelector('.btnDel');
+
+btndel.addEventListener('click', () => {
+    if (confirm("탈퇴하시겠습니까?")) {
+        location.href = "/user/main";
+    } else{
+        location.href = "/user/myinfo";
+    }
+});
+
+const errMsg = document.getElementById('errMsgId');
+
+errMsg.addEventListener('onkeyup',() => {
+    
+})

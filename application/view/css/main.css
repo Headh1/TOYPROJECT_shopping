@@ -3,13 +3,18 @@
 }
 
 .popCard{
-    width:1200px;
+    width:1000px;
+    margin:0 auto;
 }
 
 h5{
-    width: 300px;
+    /* width: 300px; */
     text-align: center;
+    margin-top: 30px;
 }
 #mainMid{
     padding-bottom : 0;
+}
+#cardimg img{
+    width: 300px;
 }

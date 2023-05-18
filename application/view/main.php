@@ -17,7 +17,7 @@
             <ul class="nav nav-pills" id="nav_log">
                 <?php if( isset($_SESSION[_STR_LOGIN_ID] )){  ?>
                     <li class="nav-item">
-                        <a href="/user/logout" class="nav-link" >로그아웃</a></li>
+                        <a href="/user/logout" class="nav-link" id = "alogout" onclick="alert('로그아웃 됩니다.')" >로그아웃</a></li>
                         <li class="nav-item">
                             <a href="/user/myinfo" class="nav-link" >내정보</a>
                         </li>
@@ -39,7 +39,16 @@
                 </a>
 
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-md-between mb-md-0 py-10">
-                    <li><a href="#" class="nav-link px-5 link-secondary">카테고리</a></li>
+                    <li class="nav-item dropdown"><p href="#" class="nav-link px-5 link-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">카테고리</p>
+                      <ul class="dropdown-menu px-5 link-secondary">
+                        <li><a class="dropdown-item" href="#">한식</a></li>
+                        <li><a class="dropdown-item" href="#">양식</a></li>
+                        <li><a class="dropdown-item" href="#">중식</a></li>
+                        <li><a class="dropdown-item" href="#">일식</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">웰빙</a></li>
+                        <li><a class="dropdown-item" href="#">비건</a></li>
+                      </ul></li>
                     <li><a href="#" class="nav-link px-4 link-dark">베스트</a></li>
                     <li><a href="#" class="nav-link px-4 link-dark">레시피</a></li>
                     <li><a href="#" class="nav-link px-4 link-dark">커뮤니티</a></li>
@@ -98,21 +107,21 @@
         <h5> 인기 레시피 </h5>
         <div class="popCard">
           <div class="container text-center">
-            <div class="row">
-              <div class="card col" style="width: 18rem;">
-                <img src="/application/view/img/비빔밥.jpg" class="card-img-top" alt="비빔밥">
+            <div class="row justify-content-between">
+              <div class="card col me-3 w-75" style="width: 10rem;" id="cardimg">
+                <img src="/application/view/img/비빔밥.jpg" class="card-img-top mt-1" alt="비빔밥">
                 <div class="card-body">
                   <p class="card-text"> 비빔밥 </p>
                 </div>
               </div>
-              <div class="card col" style="width: 18rem;">
-                <img src="/application/view/img/닭볶음탕.jpg" class="card-img-top" alt="닭볶음탕">
+              <div class="card col" style="width: 10rem;" id="cardimg">
+                <img src="/application/view/img/닭볶음탕.jpg" class="card-img-top mt-1" alt="닭볶음탕">
                 <div class="card-body">
                   <p class="card-text"> 닭볶음탕 </p>
                 </div>
               </div>
-              <div class="card col" style="width: 18rem;">
-                <img src="/application/view/img/밀푀유나베.jpg" class="card-img-top" alt="밀푀유나베">
+              <div class="card col ms-3" style="width: 10rem;" id="cardimg">
+                <img src="/application/view/img/밀푀유나베.jpg" class="card-img-top mt-1" alt="밀푀유나베">
                 <div class="card-body">
                   <p class="card-text"> 밀푀유나베 </p>
                 </div>
@@ -121,51 +130,60 @@
           </div>
         </div>
         <h5> 추천 레시피 </h5>
+        <div class="popCard">
         <div class="container text-center">
           <div class="row">
-            <div class="card col" style="width: 18rem;">
-              <img src="/application/view/img/키토.jpg" class="card-img-top" alt="키토김밥">
+            <div class="card col me-3 w-75" style="width: 10rem;" id="cardimg">
+              <img src="/application/view/img/키토.jpg" class="card-img-top mt-1" alt="키토김밥">
               <div class="card-body">
-                <h6 class="card-text"> 키토김밥 </h6>
+                <p class="card-text"> 키토김밥 </p>
               </div>
             </div>
-            <div class="card col" style="width: 18rem;">
-              <img src="/application/view/img/월남쌈.jpg" class="card-img-top" alt="월남쌈">
+            <div class="card col" style="width: 10rem;" id="cardimg">
+              <img src="/application/view/img/월남쌈.jpg" class="card-img-top mt-1" alt="월남쌈">
               <div class="card-body">
                 <p class="card-text">월남쌈</p>
               </div>
             </div>
-            <div class="card col" style="width: 18rem;">
-              <img src="/application/view/img/샐러드파스타.jpg" class="card-img-top" alt="샐러드파스타">
+            <div class="card col ms-3" style="width: 10rem;" id="cardimg">
+              <img src="/application/view/img/샐러드파스타.jpg" class="card-img-top mt-1" alt="샐러드파스타">
               <div class="card-body">
                 <p class="card-text">샐러드 파스타</p>
               </div>
             </div>
           </div>
         </div>
+        </div>
         <h5> 오늘의 레시피 </h5>
-        <div class="container text-center">
+        <div class="popCard">
+        <div class="container text-center mb-2">
           <div class="row">
-            <div class="card col" style="width: 18rem;">
-              <img src="/application/view/img/연어덮밥.jpg" class="card-img-top" alt="연어덮밥">
+            <div class="card col me-3 w-75" style="width: 10rem;" id="cardimg">
+              <img src="/application/view/img/연어덮밥.jpg" class="card-img-top mt-1" alt="연어덮밥">
               <div class="card-body">
                 <p class="card-text"> 연어덮밥 </p>
               </div>
             </div>
-            <div class="card col" style="width: 18rem;">
-              <img src="/application/view/img/김치찌개.jpg" class="card-img-top" alt="김치찌개">
+            <div class="card col" style="width: 10rem;" id="cardimg">
+              <img src="/application/view/img/김치찌개.jpg" class="card-img-top mt-1" alt="김치찌개">
               <div class="card-body">
                 <p class="card-text"> 김치찌개 </p>
               </div>
             </div>
-            <div class="card col" style="width: 18rem;">
-              <img src="/application/view/img/떡볶이.jpg" class="card-img-top" alt="떡볶이">
+            <div class="card col ms-3" style="width: 10rem;" id="cardimg">
+              <img src="/application/view/img/떡볶이.jpg" class="card-img-top mt-1" alt="떡볶이">
               <div class="card-body">
                 <p class="card-text"> 떡볶이 </p>
               </div>
             </div>
           </div>
         </div>
+                        </div>
+        <?php 
+          require_once("application/view/footer.php");
+        ?>
+
+        <script src="/application/view/js/common.js"> </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 
