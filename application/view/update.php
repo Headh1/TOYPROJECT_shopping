@@ -19,6 +19,7 @@
         <form action="" method="post">
             <label for="u_name"> NAME </label>
             <input type="text" name="u_name" id= "u_name" value ="<?php isset($this->result["u_name"]) ? $this->result["u_name"] : $_POST["u_name"] ?>">
+            <br>
             <span>
                 <?php 
                     if(isset($this->arrError["u_name"])) { 
@@ -30,8 +31,10 @@
             <input type="text" name="u_id" id= "u_id" value ="<?php echo isset($this->result["u_id"]) ? $this->result["u_id"] : $_POST["u_id"] ?>" readonly>
             <span id="errMsgId" >
             <br>
+            <br>
             <label for="u_pw"> NEW PW </label>
             <input type="password" name="u_pw" id= "u_pw" value ="<?php echo isset($this->result["u_pw"]) ? $this->result["u_pw"] : $_POST["u_pw"] ?>">
+            <br>
             <span>
                 <?php if(isset($this->arrError["u_pw"])) {
                     echo $this->arrError["u_pw"]; 

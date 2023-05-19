@@ -33,8 +33,7 @@
                     }?>
             </span>
             <br>
-            <br>
-            <input type="text" name="u_id" id="u_id" placeholder="ID" value="<?php echo !empty($_POST) ? $_POST["u_id"] : "" ?>">
+            <input type="text" name="u_id" id="u_id" placeholder="ID" class="idSize" value="<?php echo !empty($_POST) ? $_POST["u_id"] : "" ?>">
             <button type="button" onclick="chkDuplicationId()" class="btnChk"> 중복확인 </button>
             <br>
             <span id="errMsgId" >
@@ -43,7 +42,6 @@
                 echo $this->arrError["u_id"];
                 } ?> 
             </span>
-            <br>
             <br>
             <input type="password" name="u_pw" id= "u_pw" placeholder="Password" value="<?php echo !empty($_POST) ? $_POST["u_pw"] : "" ?>">
             <br>

@@ -27,8 +27,8 @@ btndel.addEventListener('click', () => {
     }
 });
 
-const errMsg = document.getElementById('errMsgId');
+// const errMsg = document.getElementById('errMsgId');
 
-errMsg.addEventListener('onkeyup',() => {
+// errMsg.addEventListener('onkeyup',() => {
     
-})
+// })

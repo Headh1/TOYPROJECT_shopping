@@ -63,7 +63,7 @@ class UserController extends Controller{
 
         // id 글자수 체크
         if(mb_strlen($arrPost["u_id"]) === 0 || mb_strlen($arrPost["u_id"]) > 12) {
-            $arrError["u_id"] = "12글자 이하로 입력해주세요.";
+            $arrError["u_id"] = "1~12글자로 입력해주세요.";
         }
 
         // id 영문 숫자 체크
